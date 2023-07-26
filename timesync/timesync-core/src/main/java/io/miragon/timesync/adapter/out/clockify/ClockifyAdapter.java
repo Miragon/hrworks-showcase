@@ -30,12 +30,18 @@ public class ClockifyAdapter implements LoadUsersPort, LoadWorkspacesPort, Aggre
     }
 
     @Override
-    public Map<String, Map<String, Duration>> aggregateTimeEntries(AggregateTimeEntriesCommand aggregateTimeEntriesCommand) {
-        return null;
+    public List<User> loadUsers(LoadUsersCommand loadUserCommand) {
+        var uri = String.format("workspaces/%s/users", loadUserCommand.getWorkspace().getId());
+        return webClient.get()
+                .uri(uri)
+                .retrieve()
+                .bodyToFlux(User.class)
+                .collectList()
+                .block();
     }
 
     @Override
-    public List<User> loadUsers(LoadUsersCommand loadUserCommand) {
+    public Map<String, Map<String, Duration>> aggregateTimeEntries(AggregateTimeEntriesCommand aggregateTimeEntriesCommand) {
         return null;
     }
 }
