@@ -2,6 +2,9 @@ package io.miragon.timecync;
 
 import io.miragon.timecync.adapter.in.miranum.MiranumInAutoConfiguration;
 import io.miragon.timecync.application.port.in.synctimes.SyncTimesUseCase;
+import io.miragon.timecync.application.port.out.LoadWorkspacesPort;
+import io.miragon.timecync.application.port.out.aggregateTimeEntries.AggregateTimeEntriesPort;
+import io.miragon.timecync.application.port.out.loadusers.LoadUsersPort;
 import io.miragon.timecync.application.service.SyncTimesService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +17,9 @@ import org.springframework.context.annotation.Import;
 public class TimeSyncAutoConfiguration {
 
     @Bean
-    public SyncTimesUseCase syncTimesUseCase() {
-        return new SyncTimesService();
+    public SyncTimesUseCase syncTimesUseCase(final LoadWorkspacesPort loadWorkspacesPort,
+                                             final LoadUsersPort loadUsersPort,
+                                             final AggregateTimeEntriesPort aggregateTimeEntriesPort) {
+        return new SyncTimesService(loadWorkspacesPort, loadUsersPort, aggregateTimeEntriesPort);
     }
 }
