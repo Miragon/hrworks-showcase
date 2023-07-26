@@ -12,6 +12,7 @@ import io.miragon.timesync.domain.Workspace;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -29,8 +30,9 @@ public class SyncTimesService implements SyncTimesUseCase {
         var aggregateTimeEntriesCommand = new AggregateTimeEntriesCommand(
                 workspace,
                 users,
-                LocalDateTime.now().minusMonths(2),
-                LocalDateTime.now()
+                LocalDateTime.now().withDayOfMonth(1).withHour(0).withMinute(0).withSecond(0).withNano(0)
+                .minus(2, ChronoUnit.MONTHS),
+                LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0)
         );
         var timeEntries = aggregateTimeEntriesPort.aggregateTimeEntries(aggregateTimeEntriesCommand);
     }
