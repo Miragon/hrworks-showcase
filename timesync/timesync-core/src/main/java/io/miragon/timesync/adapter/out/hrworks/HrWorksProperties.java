@@ -13,5 +13,5 @@ public class HrWorksProperties {
 
     private String secretAccessKey;
 
-    private String baseUrl;
+    private String baseUrl = "https://api-demo.hrworks.de/v2";
 }

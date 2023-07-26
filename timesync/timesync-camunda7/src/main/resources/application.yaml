@@ -1,3 +1,6 @@
+server:
+  port: 9090
+
 # Camunda Platform 7
 camunda:
   bpm:
@@ -7,5 +10,11 @@ camunda:
     enabled: true
   disable-backoff-strategy: true
 
-server:
-  port: 9090
+# Clockify
+clockify:
+  apiKey: "<API-KEY>"
+
+# HRWorks
+hrworks:
+  accessKey: "<ACCESS-KEY>"
+  secretAccessKey: "<SECRET-ACCESS-KEY>"
