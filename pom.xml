@@ -3,10 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.miragon</groupId>
-    <artifactId>miranum-connect-hexagonal-template</artifactId>
+    <artifactId>hrworks-showcase</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>miranum-connect-hexagonal-template</name>
-    <description>Beginner-friendly GitHub template for Miranum Connect with Hexagonal Architecture. Simplify your project initiation and leverage the benefits of the Hexagonal Architecture pattern. Create workers, correlate messages, and start processes with ease.</description>
+    <name>hrworks-showcase</name>
+    <description>This project serves as a showcase for demonstrating the synchronization of times between Clockify and HRWorks using Camunda 7 and following the principles of the Hexagonal Architecture.</description>
+
     <packaging>pom</packaging>
 
     <properties>
@@ -63,7 +64,7 @@
     </dependencies>
 
     <modules>
-        <module>example</module>
+        <module>timesync</module>
     </modules>
 
     <build>
