@@ -1,18 +1,16 @@
 package io.miragon.timecync.adapter.in.miranum;
 
-import io.miragon.timecync.application.port.in.dosomething.DoSomethingCommand;
-import io.miragon.timecync.application.port.in.dosomething.DoSomethingResult;
-import io.miragon.timecync.application.port.in.dosomething.DoSomethingUseCase;
 import io.miragon.miranum.connect.worker.api.Worker;
+import io.miragon.timecync.application.port.in.synctimes.SyncTimesUseCase;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class MiranumWorkerAdapter {
 
-    private final DoSomethingUseCase doSomethingUseCase;
+    private final SyncTimesUseCase syncTimesUseCase;
 
-    @Worker(type = "my-type")
-    public DoSomethingResult doSomething(DoSomethingCommand command) {
-        return doSomethingUseCase.doSomething(command);
+    @Worker(type = "syncTimes")
+    public void doSomething() {
+        syncTimesUseCase.syncTimes();
     }
 }
