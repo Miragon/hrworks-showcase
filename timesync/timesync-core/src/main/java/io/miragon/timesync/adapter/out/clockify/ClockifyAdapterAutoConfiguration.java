@@ -14,12 +14,12 @@ public class ClockifyAdapterAutoConfiguration {
     private final ClockifyProperties clockifyProperties;
 
     @Bean
-    ClockifyAdapter clockifyAdapter(final WebClient webClient) {
-        return new ClockifyAdapter(webClient);
+    ClockifyAdapter clockifyAdapter() {
+        return new ClockifyAdapter(clockifyWebClient());
     }
 
     @Bean
-    WebClient webClient() {
+    WebClient clockifyWebClient() {
         return WebClient.builder()
                 .baseUrl(clockifyProperties.getBaseUrl())
                 .defaultHeader("x-api-key", clockifyProperties.getApiKey())

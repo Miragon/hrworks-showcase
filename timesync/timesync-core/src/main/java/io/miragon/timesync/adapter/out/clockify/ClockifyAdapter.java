@@ -24,11 +24,11 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class ClockifyAdapter implements LoadUsersPort, LoadWorkspacesPort, AggregateTimeEntriesPort {
 
-    private final WebClient webClient;
+    private final WebClient clockifyWebClient;
 
     @Override
     public List<Workspace> loadWorkspaces() {
-        return webClient.get()
+        return clockifyWebClient.get()
                 .uri("/workspaces")
                 .retrieve()
                 .bodyToFlux(Workspace.class)
@@ -39,7 +39,7 @@ public class ClockifyAdapter implements LoadUsersPort, LoadWorkspacesPort, Aggre
     @Override
     public List<User> loadUsers(LoadUsersCommand loadUserCommand) {
         var uri = String.format("/workspaces/%s/users", loadUserCommand.getWorkspace().getId());
-        return webClient.get()
+        return clockifyWebClient.get()
                 .uri(uri)
                 .retrieve()
                 .bodyToFlux(User.class)
@@ -92,7 +92,7 @@ public class ClockifyAdapter implements LoadUsersPort, LoadWorkspacesPort, Aggre
                 user.getId(),
                 formatter.format(fromInstant),
                 formatter.format(toInstant));
-        return webClient.get()
+        return clockifyWebClient.get()
                 .uri(uri)
                 .retrieve()
                 .bodyToFlux(UserDetails.class)

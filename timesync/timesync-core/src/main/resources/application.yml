@@ -1,2 +1,8 @@
 clockify:
   apiKey: "<API-KEY>"
+
+# HRWorks
+hrworks:
+  accessKey: "<ACCESS-KEY>"
+  secretAccessKey: "<SECRET-ACCESS-KEY>"
+  baseUrl: "https://api-demo.hrworks.de/v2"
