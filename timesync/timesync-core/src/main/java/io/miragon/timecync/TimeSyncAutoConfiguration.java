@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Import;
         MiranumInAutoConfiguration.class,
         MiranumOutAutoConfiguration.class
 })
-public class ExampleAutoConfiguration {
+public class TimeSyncAutoConfiguration {
 
     @Bean
     public DoSomethingUseCase doSomethingUseCase() {
