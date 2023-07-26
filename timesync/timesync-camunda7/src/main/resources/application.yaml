@@ -6,3 +6,6 @@ camunda:
   autoDeploy:
     enabled: true
   disable-backoff-strategy: true
+
+server:
+  port: 9090
