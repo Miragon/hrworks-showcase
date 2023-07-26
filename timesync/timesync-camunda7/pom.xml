@@ -46,18 +46,6 @@
             <artifactId>worker-adapter-c7</artifactId>
             <version>${miranum.version}</version>
         </dependency>
-
-        <dependency>
-            <groupId>io.miragon.miranum</groupId>
-            <artifactId>process-adapter-c7</artifactId>
-            <version>${miranum.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.miragon.miranum</groupId>
-            <artifactId>message-adapter-c7</artifactId>
-            <version>${miranum.version}</version>
-        </dependency>
         <!-- MIRANUM CAMUNDA 7 DEPENDENCIES -->
     </dependencies>
 
