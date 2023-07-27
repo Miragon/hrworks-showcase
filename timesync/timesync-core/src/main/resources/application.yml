@@ -1,0 +1,8 @@
+# Clockify
+clockify:
+  apiKey: "<API-KEY>"
+
+# HRWorks
+hrworks:
+  accessKey: "<ACCESS-KEY>"
+  secretAccessKey: "<SECRET-ACCESS-KEY>"
