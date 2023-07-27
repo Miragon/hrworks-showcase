@@ -21,14 +21,14 @@ public class JwtAuthenticationFilter implements ExchangeFilterFunction {
     private String jwtToken;
     private long jwtTokenExpire;
 
+    private final WebClient webClient = WebClient.builder()
+            .baseUrl(hrWorksProperties.getBaseUrl())
+            .build();
+
     private String fetchToken() {
         Map<String, String> requestBody = new HashMap<>();
         requestBody.put("accessKey", hrWorksProperties.getAccessKey());
         requestBody.put("secretAccessKey", hrWorksProperties.getSecretAccessKey());
-
-        var webClient = WebClient.builder()
-                .baseUrl(hrWorksProperties.getBaseUrl())
-                .build();
 
         var token = webClient.post()
                 .uri("/authentication")
