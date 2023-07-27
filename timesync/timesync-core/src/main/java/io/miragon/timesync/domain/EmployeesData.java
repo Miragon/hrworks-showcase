@@ -1,15 +1,17 @@
-package io.miragon.timesync.adapter.out.hrworks;
+package io.miragon.timesync.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class TokenResponse {
+public class EmployeesData {
 
-    private String token;
+    private List<EmployeeData> persons;
 }

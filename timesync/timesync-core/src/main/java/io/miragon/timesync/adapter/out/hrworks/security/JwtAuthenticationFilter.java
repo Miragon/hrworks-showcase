@@ -1,5 +1,7 @@
-package io.miragon.timesync.adapter.out.hrworks;
+package io.miragon.timesync.adapter.out.hrworks.security;
 
+import io.miragon.timesync.adapter.out.hrworks.HrWorksProperties;
+import io.miragon.timesync.adapter.out.hrworks.models.TokenResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.*;
@@ -20,7 +22,7 @@ public class JwtAuthenticationFilter implements ExchangeFilterFunction {
     private String jwtToken;
     private long jwtTokenExpire;
 
-    JwtAuthenticationFilter(final HrWorksProperties hrWorksProperties) {
+    public JwtAuthenticationFilter(final HrWorksProperties hrWorksProperties) {
         this.hrWorksProperties = hrWorksProperties;
         this.webClient = WebClient.builder()
                 .baseUrl(hrWorksProperties.getBaseUrl())
@@ -42,7 +44,7 @@ public class JwtAuthenticationFilter implements ExchangeFilterFunction {
 
         jwtTokenExpire = System.currentTimeMillis() + JWT_TOKEN_TTL;
 
-        log.info("JWT renewed");
+        log.info("[AUTH] JWT renewed.");
 
         return token.getToken();
     }

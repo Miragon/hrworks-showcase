@@ -1,13 +1,15 @@
-package io.miragon.timesync.application.port.out.sendworkingtimes;
+package io.miragon.timesync.adapter.out.hrworks.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-public class SendWorkingTimesCommand {
+public class WorkingTime {
 
     private String beginDateAndTime;
 

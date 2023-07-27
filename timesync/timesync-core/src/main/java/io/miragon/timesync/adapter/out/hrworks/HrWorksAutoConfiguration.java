@@ -1,5 +1,6 @@
 package io.miragon.timesync.adapter.out.hrworks;
 
+import io.miragon.timesync.adapter.out.hrworks.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;

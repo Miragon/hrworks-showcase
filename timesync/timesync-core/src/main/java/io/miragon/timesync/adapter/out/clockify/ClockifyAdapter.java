@@ -59,10 +59,7 @@ public class ClockifyAdapter implements LoadUsersPort, LoadWorkspacesPort, Aggre
                     continue;
                 }
 
-                var startDateAndTime = LocalDateTime.parse(entry.getTimeInterval().getStart(), DateTimeFormatter.ISO_DATE_TIME).toString();
-                var endDateAndTime = LocalDateTime.parse(entry.getTimeInterval().getEnd(), DateTimeFormatter.ISO_DATE_TIME).toString();
-
-                map.put(startDateAndTime, endDateAndTime);
+                map.put(entry.getTimeInterval().getStart(), entry.getTimeInterval().getEnd());
 
                 aggregated.put(user.getEmail(), map);
             }
