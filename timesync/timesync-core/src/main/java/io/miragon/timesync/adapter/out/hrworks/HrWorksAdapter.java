@@ -2,7 +2,7 @@ package io.miragon.timesync.adapter.out.hrworks;
 
 import io.miragon.timesync.adapter.out.hrworks.models.CreateWorkingTimesRequest;
 import io.miragon.timesync.adapter.out.hrworks.models.WorkingTime;
-import io.miragon.timesync.application.port.out.HealthCheckPort;
+import io.miragon.timesync.application.port.out.healthcheck.HealthCheckPort;
 import io.miragon.timesync.application.port.out.loademployeesdata.LoadEmployeesDataPort;
 import io.miragon.timesync.application.port.out.sendworkingtimes.SendWorkingTimesCommand;
 import io.miragon.timesync.application.port.out.sendworkingtimes.SendWorkingTimesPort;

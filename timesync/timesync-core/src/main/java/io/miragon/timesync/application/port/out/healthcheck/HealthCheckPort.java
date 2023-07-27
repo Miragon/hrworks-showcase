@@ -1,4 +1,4 @@
-package io.miragon.timesync.application.port.out;
+package io.miragon.timesync.application.port.out.healthcheck;
 
 public interface HealthCheckPort {
 
