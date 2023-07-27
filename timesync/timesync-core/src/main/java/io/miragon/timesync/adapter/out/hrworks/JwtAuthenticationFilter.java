@@ -1,6 +1,5 @@
 package io.miragon.timesync.adapter.out.hrworks;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.*;
@@ -11,19 +10,22 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-@RequiredArgsConstructor
 @Slf4j
 public class JwtAuthenticationFilter implements ExchangeFilterFunction {
 
     private static final long JWT_TOKEN_TTL = TimeUnit.MINUTES.toMillis(15);
 
     private final HrWorksProperties hrWorksProperties;
+    private final WebClient webClient;
     private String jwtToken;
     private long jwtTokenExpire;
 
-    private final WebClient webClient = WebClient.builder()
-            .baseUrl(hrWorksProperties.getBaseUrl())
-            .build();
+    JwtAuthenticationFilter(final HrWorksProperties hrWorksProperties) {
+        this.hrWorksProperties = hrWorksProperties;
+        this.webClient = WebClient.builder()
+                .baseUrl(hrWorksProperties.getBaseUrl())
+                .build();
+    }
 
     private String fetchToken() {
         Map<String, String> requestBody = new HashMap<>();
