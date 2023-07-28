@@ -26,7 +26,6 @@ public class SyncTimesService implements SyncTimesUseCase {
     private final LoadUsersPort loadUsersPort;
     private final AggregateTimeEntriesPort aggregateTimeEntriesPort;
     private static final LocalDateTime firstOfCurrentMonth = LocalDateTime.now()
-            .plusMonths(1)
             .withDayOfMonth(1)
             .with(LocalTime.MIN);
     private static final LocalDateTime firstDayOfTwoMonthsAgo = LocalDateTime.now()
