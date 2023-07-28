@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  # PostgreSQL service
+  postgres:
+    image: postgres:12
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=md5
+      - POSTGRES_USER=camunda
+      - POSTGRES_PASSWORD=camunda
+
+  # Camunda Platform 7 with History Plugin
+  camunda-postgres:
+    image: camunda7-with-history-plugin:7.15.0
+    environment:
+      - DB_DRIVER=org.postgresql.Driver
+      - DB_URL=jdbc:postgresql://postgres:5432/camunda
+      - DB_USERNAME=camunda
+      - DB_PASSWORD=camunda
+      - WAIT_FOR=postgres:5432
+    links:
+      - postgres
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
