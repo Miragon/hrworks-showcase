@@ -7,7 +7,7 @@ import io.miragon.timesync.application.port.out.loadusers.LoadUsersCommand;
 import io.miragon.timesync.application.port.out.loadusers.LoadUsersPort;
 import io.miragon.timesync.application.port.out.loadworkspaces.LoadWorkspacesPort;
 import io.miragon.timesync.domain.User;
-import io.miragon.timesync.domain.UserDetails;
+import io.miragon.timesync.adapter.out.clockify.models.UserDetails;
 import io.miragon.timesync.domain.Workspace;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.reactive.function.client.WebClient;

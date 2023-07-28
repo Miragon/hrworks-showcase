@@ -1,4 +1,4 @@
-package io.miragon.timesync.domain;
+package io.miragon.timesync.adapter.out.clockify.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,11 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class TimeInterval {
+public class UserDetails {
 
-    private String start;
-
-    private String duration;
-
-    private String end;
+    private TimeInterval timeInterval;
 }
