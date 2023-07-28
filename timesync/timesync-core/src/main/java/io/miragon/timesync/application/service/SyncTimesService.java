@@ -20,7 +20,8 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Slf4j
-public class SyncTimesService implements SyncTimesUseCase {
+public
+class SyncTimesService implements SyncTimesUseCase {
 
     private final LoadWorkspacesPort loadWorkspacesPort;
     private final LoadUsersPort loadUsersPort;
