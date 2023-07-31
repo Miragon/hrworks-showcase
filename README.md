@@ -9,6 +9,15 @@ To run the Camunda Platform with the history plugin and a PostgreSQL database, f
 
 First, build the custom Camunda Docker image that includes the history plugin:
 
+First navigate to the hrworks-showcase-c7 directory:
+
+```bash
+cd stack/hrworks-showcase-c7
+```
+
+Then build the Docker image using the following command:
+
+
 ```bash
 docker build -t camunda-7-with-history-plugin -f Dockerfile.camunda .
 ```
