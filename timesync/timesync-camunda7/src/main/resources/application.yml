@@ -1,0 +1,20 @@
+server:
+  port: 9090
+
+# Camunda Platform 7
+camunda:
+  bpm:
+    client:
+      base-url: http://localhost:8080/engine-rest
+  autoDeploy:
+    enabled: true
+  disable-backoff-strategy: true
+
+# Clockify
+clockify:
+  apiKey: "<API-KEY>"
+
+# HRWorks
+hrworks:
+  accessKey: "<ACCESS-KEY>"
+  secretAccessKey: "<SECRET-ACCESS-KEY>"
