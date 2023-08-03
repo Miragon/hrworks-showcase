@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @AllArgsConstructor
 @Getter
@@ -16,7 +15,7 @@ public class AggregateTimeEntriesCommand {
 
     private Workspace workspace;
 
-    private List<User> users;
+    private User user;
 
     private LocalDateTime fromDateTime;
 

@@ -17,7 +17,6 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 @RequiredArgsConstructor
@@ -48,21 +47,18 @@ public class ClockifyAdapter implements LoadUsersPort, LoadWorkspacesPort, Aggre
 
     @Override
     public AggregateTimeEntriesResult aggregateTimeEntries(AggregateTimeEntriesCommand aggregateTimeEntriesCommand) {
-        Map<String, Map<String, String>> aggregated = new HashMap<>();
-        for (User user : aggregateTimeEntriesCommand.getUsers()) {
-            List<UserDetails> userDetails;
-            userDetails = loadUserDetails(aggregateTimeEntriesCommand.getWorkspace(), user, aggregateTimeEntriesCommand.getFromDateTime(), aggregateTimeEntriesCommand.getToDateTime());
+        HashMap<String, String> aggregated = new HashMap<>();
 
-            HashMap<String, String> map = new HashMap<>();
-            for (UserDetails entry : userDetails) {
-                if (Objects.isNull(entry.getTimeInterval().getEnd()) || Objects.isNull(entry.getTimeInterval().getDuration())) {
-                    continue;
-                }
+        User user = aggregateTimeEntriesCommand.getUser();
+        List<UserDetails> userDetails;
+        userDetails = loadUserDetails(aggregateTimeEntriesCommand.getWorkspace(), user, aggregateTimeEntriesCommand.getFromDateTime(), aggregateTimeEntriesCommand.getToDateTime());
 
-                map.put(entry.getTimeInterval().getStart(), entry.getTimeInterval().getEnd());
-
-                aggregated.put(user.getEmail(), map);
+        for (UserDetails entry : userDetails) {
+            if (Objects.isNull(entry.getTimeInterval().getEnd()) || Objects.isNull(entry.getTimeInterval().getDuration())) {
+                continue;
             }
+
+            aggregated.put(entry.getTimeInterval().getStart(), entry.getTimeInterval().getEnd());
         }
         return new AggregateTimeEntriesResult(aggregated);
     }

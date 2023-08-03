@@ -1,5 +1,6 @@
 package io.miragon.timesync;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.miragon.timesync.adapter.in.miranum.MiranumInAutoConfiguration;
 import io.miragon.timesync.adapter.out.clockify.ClockifyAdapterAutoConfiguration;
 import io.miragon.timesync.adapter.out.hrworks.HrWorksAutoConfiguration;
