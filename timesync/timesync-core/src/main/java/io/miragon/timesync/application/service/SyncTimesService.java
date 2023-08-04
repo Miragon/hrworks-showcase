@@ -17,6 +17,7 @@ import io.miragon.timesync.domain.UserResponse;
 import io.miragon.timesync.domain.Workspace;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -32,7 +33,7 @@ class SyncTimesService implements SyncTimesUseCase {
     private final LoadUsersPort loadUsersPort;
     private final AggregateTimeEntriesPort aggregateTimeEntriesPort;
     private static final LocalDateTime firstOfCurrentMonth = LocalDateTime.now()
-            .withDayOfMonth(4)
+            .withDayOfMonth(5)
             .with(LocalTime.MIN);
     private static final LocalDateTime firstDayOfTwoMonthsAgo = LocalDateTime.now()
             .minusMonths(2)
@@ -52,11 +53,16 @@ class SyncTimesService implements SyncTimesUseCase {
         this.workspace = workspaces.get(0);
         log.info("[LOAD-USERS] Loading users...");
         List<User> users = loadUsersPort.loadUsers(new LoadUsersCommand(workspace));
+
+        // Force an error in loadTime()
+        users.add(new User("123", "error@miragon.io"));
+
         return new UserResponse(users);
     }
 
     @Override
-    public AggregateTimeEntriesResult loadTime(LoadTimeCommand loadTimeCommand) {
+    public AggregateTimeEntriesResult loadTime(LoadTimeCommand loadTimeCommand) throws WebClientResponseException
+    {
         User user = loadTimeCommand.getUser();
         var aggregateTimeEntriesCommand =
                 new AggregateTimeEntriesCommand(this.workspace, user, firstDayOfTwoMonthsAgo, firstOfCurrentMonth);

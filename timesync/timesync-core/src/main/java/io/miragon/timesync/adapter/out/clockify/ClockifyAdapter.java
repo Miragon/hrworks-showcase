@@ -11,6 +11,7 @@ import io.miragon.timesync.adapter.out.clockify.models.UserDetails;
 import io.miragon.timesync.domain.Workspace;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientRequestException;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -63,7 +64,8 @@ public class ClockifyAdapter implements LoadUsersPort, LoadWorkspacesPort, Aggre
         return new AggregateTimeEntriesResult(aggregated);
     }
 
-    private List<UserDetails> loadUserDetails(Workspace workspace, User user, LocalDateTime from, LocalDateTime to) {
+    private List<UserDetails> loadUserDetails(Workspace workspace, User user, LocalDateTime from, LocalDateTime to) throws WebClientRequestException
+    {
         var formatter = DateTimeFormatter.ISO_INSTANT;
         var uri = String.format(
                 "/workspaces/%s/user/%s/time-entries?page-size=5000&start=%s&end=%s",
