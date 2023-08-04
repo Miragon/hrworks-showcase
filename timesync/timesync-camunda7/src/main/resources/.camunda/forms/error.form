@@ -1,0 +1,49 @@
+{
+  "components": [
+    {
+      "text": "# Unable to sync employee:",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": "Row_0sad9wz",
+        "columns": null
+      },
+      "id": "Field_1qt7yd6"
+    },
+    {
+      "label": "Employee ID",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0p9ou6c",
+        "columns": null
+      },
+      "id": "Field_08u1oxi",
+      "key": "id",
+      "description": "ID from Clockify",
+      "defaultValue": "${id}",
+      "disabled": true
+    },
+    {
+      "label": "E-Mail",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_08kzip1",
+        "columns": null
+      },
+      "id": "Field_14f6lnn",
+      "key": "email",
+      "description": "E-Mail of employee",
+      "defaultValue": "${email}",
+      "disabled": true
+    }
+  ],
+  "type": "default",
+  "id": "Form_1oa39h7",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.13.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.19.0",
+  "schemaVersion": 9
+}

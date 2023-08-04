@@ -19,15 +19,15 @@ public class MiranumWorkerAdapter {
     @Worker(type = "loadUsers")
     public UserResponse loadUsers(Object o) { return syncTimesUseCase.loadUsers(); }
 
-    @Worker(type = "loadTime")
+    @Worker(type = "loadTimes")
     @ElementTemplate(name = "Load Times", description = "Load the working ours of a specific employee.")
-    public AggregateTimeEntriesResult loadTime(LoadTimeCommand loadTimeCommand)
+    public AggregateTimeEntriesResult loadTimes(LoadTimeCommand loadTimeCommand)
     {
         try
         {
             return syncTimesUseCase.loadTime(loadTimeCommand);
         } catch (WebClientResponseException exception) {
-            String message = "User data could not be retrieved due to" + exception.getMessage();
+            String message = "User data could not be retrieved due to " + exception.getMessage();
             throw new BusinessException(exception.getStatusCode().toString(), message);
         }
     }

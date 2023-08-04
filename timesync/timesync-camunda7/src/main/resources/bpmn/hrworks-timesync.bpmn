@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.13.0">
   <bpmn:collaboration id="Collaboration_01x1lnb">
-    <bpmn:participant id="Participant_1roeun7" name="HRworks TimeSynch Process" processRef="Process_1" />
+    <bpmn:participant id="Participant_1roeun7" name="HRworks TimeSynch Process" processRef="HRworks-Showcase" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_1" isExecutable="true">
+  <bpmn:process id="HRworks-Showcase" isExecutable="true">
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>Flow_1d64sl3</bpmn:outgoing>
     </bpmn:startEvent>
@@ -26,7 +26,7 @@
       <bpmn:extensionElements />
       <bpmn:incoming>Flow_17ywa8l</bpmn:incoming>
       <bpmn:outgoing>Flow_19lzhxe</bpmn:outgoing>
-      <bpmn:multiInstanceLoopCharacteristics camunda:collection="${users.elements()}" camunda:elementVariable="user" />
+      <bpmn:multiInstanceLoopCharacteristics camunda:asyncBefore="true" camunda:collection="${users.elements()}" camunda:elementVariable="user" />
       <bpmn:startEvent id="Event_0yccuze">
         <bpmn:outgoing>Flow_0o7gw5k</bpmn:outgoing>
       </bpmn:startEvent>
@@ -43,25 +43,32 @@
       <bpmn:endEvent id="Event_1w5i4cb" name="times synced">
         <bpmn:incoming>Flow_0wku1by</bpmn:incoming>
       </bpmn:endEvent>
-      <bpmn:endEvent id="Event_1blglkt">
+      <bpmn:endEvent id="Event_1blglkt" name="error processed">
         <bpmn:incoming>Flow_0kp2a9q</bpmn:incoming>
       </bpmn:endEvent>
-      <bpmn:userTask id="Activity_19r93sh" name="Notify">
+      <bpmn:userTask id="Activity_19r93sh" name="Notify" camunda:formRef="Form_1oa39h7" camunda:formRefBinding="deployment" camunda:assignee="demo">
+        <bpmn:extensionElements>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="id">${user.prop('id')}</camunda:inputParameter>
+            <camunda:inputParameter name="email">${user.prop('email')}</camunda:inputParameter>
+          </camunda:inputOutput>
+        </bpmn:extensionElements>
         <bpmn:incoming>Flow_1tq89bh</bpmn:incoming>
         <bpmn:outgoing>Flow_0kp2a9q</bpmn:outgoing>
       </bpmn:userTask>
-      <bpmn:boundaryEvent id="Event_1vuiql6" attachedToRef="Activity_0j5isex">
+      <bpmn:boundaryEvent id="Event_1vuiql6" camunda:asyncAfter="true" attachedToRef="Activity_0j5isex">
         <bpmn:outgoing>Flow_1tq89bh</bpmn:outgoing>
-        <bpmn:errorEventDefinition id="ErrorEventDefinition_02bvvu6" camunda:errorCodeVariable="errorCode" camunda:errorMessageVariable="errorMessage" />
+        <bpmn:errorEventDefinition id="ErrorEventDefinition_02bvvu6" errorRef="Error_1vt36pm" />
       </bpmn:boundaryEvent>
       <bpmn:sequenceFlow id="Flow_0o7gw5k" sourceRef="Event_0yccuze" targetRef="Activity_0j5isex" />
       <bpmn:sequenceFlow id="Flow_0ufba14" sourceRef="Activity_0j5isex" targetRef="Activity_13l540r" />
       <bpmn:sequenceFlow id="Flow_0wku1by" sourceRef="Activity_13l540r" targetRef="Event_1w5i4cb" />
       <bpmn:sequenceFlow id="Flow_0kp2a9q" sourceRef="Activity_19r93sh" targetRef="Event_1blglkt" />
       <bpmn:sequenceFlow id="Flow_1tq89bh" sourceRef="Event_1vuiql6" targetRef="Activity_19r93sh" />
-      <bpmn:serviceTask id="Activity_0j5isex" name="Load Time Entries" camunda:modelerTemplate="loadTime" camunda:type="external" camunda:topic="loadTime">
+      <bpmn:serviceTask id="Activity_0j5isex" name="Load Time Entries" camunda:type="external" camunda:topic="loadTimes">
         <bpmn:extensionElements>
           <camunda:inputOutput>
+            <camunda:inputParameter name="aggregatedUserTimes">${JSON("{}")}</camunda:inputParameter>
             <camunda:inputParameter name="user">${user}</camunda:inputParameter>
             <camunda:outputParameter name="timeEntries">${aggregatedUserTimes}</camunda:outputParameter>
           </camunda:inputOutput>
@@ -71,7 +78,7 @@
       </bpmn:serviceTask>
     </bpmn:subProcess>
   </bpmn:process>
-  <bpmn:error id="Error_1vt36pm" name="My Error" errorCode="BusinessException" />
+  <bpmn:error id="Error_1vt36pm" name="BpmnError" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_01x1lnb">
       <bpmndi:BPMNShape id="Participant_1roeun7_di" bpmnElement="Participant_1roeun7" isHorizontal="true">
@@ -106,12 +113,15 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1blglkt_di" bpmnElement="Event_1blglkt">
         <dc:Bounds x="902" y="342" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="881" y="385" width="78" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1j2myso_di" bpmnElement="Activity_0j5isex">
+        <dc:Bounds x="580" y="200" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0i9qt6j_di" bpmnElement="Activity_19r93sh">
-        <dc:Bounds x="710" y="320" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_11v488s_di" bpmnElement="Activity_0j5isex">
-        <dc:Bounds x="580" y="200" width="100" height="80" />
+        <dc:Bounds x="740" y="320" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1dtouf4_di" bpmnElement="Event_1vuiql6">
         <dc:Bounds x="592" y="262" width="36" height="36" />
@@ -129,13 +139,13 @@
         <di:waypoint x="902" y="240" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0kp2a9q_di" bpmnElement="Flow_0kp2a9q">
-        <di:waypoint x="810" y="360" />
+        <di:waypoint x="840" y="360" />
         <di:waypoint x="902" y="360" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1tq89bh_di" bpmnElement="Flow_1tq89bh">
         <di:waypoint x="610" y="298" />
         <di:waypoint x="610" y="360" />
-        <di:waypoint x="710" y="360" />
+        <di:waypoint x="740" y="360" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1d64sl3_di" bpmnElement="Flow_1d64sl3">
         <di:waypoint x="248" y="240" />
