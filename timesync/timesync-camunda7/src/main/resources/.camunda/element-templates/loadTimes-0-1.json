@@ -13,7 +13,7 @@
       "name" : "camunda:type"
     }
   }, {
-    "value" : "loadTime",
+    "value" : "loadTimes",
     "label" : "Topic",
     "type" : "String",
     "editable" : false,
@@ -28,6 +28,14 @@
     "binding" : {
       "type" : "camunda:inputParameter",
       "name" : "user"
+    }
+  }, {
+    "value" : "${JSON('{}')}",
+    "label" : "User",
+    "type" : "Hidden",
+    "binding" : {
+      "type" : "camunda:inputParameter",
+      "name" : "aggregatedUserTimes"
     }
   }, {
     "value" : "timeEntries",

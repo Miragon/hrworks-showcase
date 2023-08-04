@@ -65,11 +65,11 @@
       <bpmn:sequenceFlow id="Flow_0wku1by" sourceRef="Activity_13l540r" targetRef="Event_1w5i4cb" />
       <bpmn:sequenceFlow id="Flow_0kp2a9q" sourceRef="Activity_19r93sh" targetRef="Event_1blglkt" />
       <bpmn:sequenceFlow id="Flow_1tq89bh" sourceRef="Event_1vuiql6" targetRef="Activity_19r93sh" />
-      <bpmn:serviceTask id="Activity_0j5isex" name="Load Time Entries" camunda:type="external" camunda:topic="loadTimes">
+      <bpmn:serviceTask id="Activity_0j5isex" name="Load Time Entries" camunda:modelerTemplate="loadTime" camunda:type="external" camunda:topic="loadTimes">
         <bpmn:extensionElements>
           <camunda:inputOutput>
-            <camunda:inputParameter name="aggregatedUserTimes">${JSON("{}")}</camunda:inputParameter>
             <camunda:inputParameter name="user">${user}</camunda:inputParameter>
+            <camunda:inputParameter name="aggregatedUserTimes">${JSON('{}')}</camunda:inputParameter>
             <camunda:outputParameter name="timeEntries">${aggregatedUserTimes}</camunda:outputParameter>
           </camunda:inputOutput>
         </bpmn:extensionElements>
@@ -117,11 +117,11 @@
           <dc:Bounds x="881" y="385" width="78" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1j2myso_di" bpmnElement="Activity_0j5isex">
-        <dc:Bounds x="580" y="200" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0i9qt6j_di" bpmnElement="Activity_19r93sh">
         <dc:Bounds x="740" y="320" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ld99fx_di" bpmnElement="Activity_0j5isex">
+        <dc:Bounds x="580" y="200" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1dtouf4_di" bpmnElement="Event_1vuiql6">
         <dc:Bounds x="592" y="262" width="36" height="36" />
