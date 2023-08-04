@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>timesync-camunda7</artifactId>
-    <name>example-camunda7</name>
+    <name>timesync-camunda7</name>
     <packaging>jar</packaging>
 
     <parent>
@@ -46,6 +46,12 @@
             <artifactId>worker-adapter-c7</artifactId>
             <version>${miranum.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>io.miragon.miranum</groupId>
+            <artifactId>element-templates-c7</artifactId>
+            <version>${miranum.version}</version>
+        </dependency>
         <!-- MIRANUM CAMUNDA 7 DEPENDENCIES -->
     </dependencies>
 
@@ -54,6 +60,16 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>io.miragon.miranum</groupId>
+                <artifactId>element-templates-generator-maven-plugin</artifactId>
+
+                <configuration>
+                    <targetPlatforms>camunda7</targetPlatforms>
+                    <outputDirectory>src/main/resources/.camunda/element-templates</outputDirectory>
+                </configuration>
             </plugin>
         </plugins>
     </build>
