@@ -17,7 +17,7 @@ cd stack/hrworks-showcase-c7
 Then build the Docker image using the following command:
 
 ```bash
-docker build -t camunda-7-with-history-plugin -f Dockerfile.camunda .
+docker build -t camunda-7-with-history-plugin -f Dockerfile .
 ```
 
 ### Step 2: Start the Stack
@@ -78,6 +78,14 @@ running the project.
 ## Running the Project
 
 After following the [Project Setup](#project-setup) you should be able to simply start the `TimeSyncCamunda7Application`.
+
+## Deploy artifacts
+
+You can use the [Camunda Modeler](https://camunda.com/de/download/modeler/) to deploy the process.
+1. Open the [bpmn file](./timesync/timesync-camunda7/src/main/resources/bpmn/hrworks-timesync.bpmn)
+2. Add the [form](./timesync/timesync-camunda7/src/main/resources/.camunda/forms/error.form) to your deployment  
+<img src="https://raw.githubusercontent.com/Miragon/hrworks-showcase/2fc4af1e8e3d39e376288e141c3bdca13bbd8336/images/deployment.png?token=GHSAT0AAAAAAB5LO62U3XENLYIVJCL3CE4IZGNF4ZA" alt="deployment" width=180>
+3. Click on `Deploy`
 
 ## Run Tests
 
