@@ -23,29 +23,17 @@
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_19lzhxe" sourceRef="Activity_1gzbrmy" targetRef="Event_0xpojgt" />
     <bpmn:subProcess id="Activity_1gzbrmy">
-      <bpmn:extensionElements>
-        <camunda:inputOutput>
-          <camunda:inputParameter name="user">${user}</camunda:inputParameter>
-        </camunda:inputOutput>
-      </bpmn:extensionElements>
+      <bpmn:extensionElements />
       <bpmn:incoming>Flow_17ywa8l</bpmn:incoming>
       <bpmn:outgoing>Flow_19lzhxe</bpmn:outgoing>
       <bpmn:multiInstanceLoopCharacteristics camunda:collection="${users.elements()}" camunda:elementVariable="user" />
       <bpmn:startEvent id="Event_0yccuze">
         <bpmn:outgoing>Flow_0o7gw5k</bpmn:outgoing>
       </bpmn:startEvent>
-      <bpmn:serviceTask id="Activity_0j5isex" name="Load Time Entries" camunda:type="external" camunda:topic="loadTime">
+      <bpmn:serviceTask id="Activity_13l540r" name="Sync Time" camunda:modelerTemplate="syncTimes" camunda:type="external" camunda:topic="syncTimes">
         <bpmn:extensionElements>
           <camunda:inputOutput>
-            <camunda:outputParameter name="timeEntries">${aggregatedUserTimes}</camunda:outputParameter>
-          </camunda:inputOutput>
-        </bpmn:extensionElements>
-        <bpmn:incoming>Flow_0o7gw5k</bpmn:incoming>
-        <bpmn:outgoing>Flow_0ufba14</bpmn:outgoing>
-      </bpmn:serviceTask>
-      <bpmn:serviceTask id="Activity_13l540r" name="Sync Time" camunda:type="external" camunda:topic="syncTimes">
-        <bpmn:extensionElements>
-          <camunda:inputOutput>
+            <camunda:inputParameter name="user">${user}</camunda:inputParameter>
             <camunda:inputParameter name="timeEntries">${timeEntries}</camunda:inputParameter>
           </camunda:inputOutput>
         </bpmn:extensionElements>
@@ -64,15 +52,26 @@
       </bpmn:userTask>
       <bpmn:boundaryEvent id="Event_1vuiql6" attachedToRef="Activity_0j5isex">
         <bpmn:outgoing>Flow_1tq89bh</bpmn:outgoing>
-        <bpmn:errorEventDefinition id="ErrorEventDefinition_02bvvu6" />
+        <bpmn:errorEventDefinition id="ErrorEventDefinition_02bvvu6" camunda:errorCodeVariable="errorCode" camunda:errorMessageVariable="errorMessage" />
       </bpmn:boundaryEvent>
       <bpmn:sequenceFlow id="Flow_0o7gw5k" sourceRef="Event_0yccuze" targetRef="Activity_0j5isex" />
       <bpmn:sequenceFlow id="Flow_0ufba14" sourceRef="Activity_0j5isex" targetRef="Activity_13l540r" />
       <bpmn:sequenceFlow id="Flow_0wku1by" sourceRef="Activity_13l540r" targetRef="Event_1w5i4cb" />
       <bpmn:sequenceFlow id="Flow_0kp2a9q" sourceRef="Activity_19r93sh" targetRef="Event_1blglkt" />
       <bpmn:sequenceFlow id="Flow_1tq89bh" sourceRef="Event_1vuiql6" targetRef="Activity_19r93sh" />
+      <bpmn:serviceTask id="Activity_0j5isex" name="Load Time Entries" camunda:modelerTemplate="loadTime" camunda:type="external" camunda:topic="loadTime">
+        <bpmn:extensionElements>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="user">${user}</camunda:inputParameter>
+            <camunda:outputParameter name="timeEntries">${aggregatedUserTimes}</camunda:outputParameter>
+          </camunda:inputOutput>
+        </bpmn:extensionElements>
+        <bpmn:incoming>Flow_0o7gw5k</bpmn:incoming>
+        <bpmn:outgoing>Flow_0ufba14</bpmn:outgoing>
+      </bpmn:serviceTask>
     </bpmn:subProcess>
   </bpmn:process>
+  <bpmn:error id="Error_1vt36pm" name="My Error" errorCode="BusinessException" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_01x1lnb">
       <bpmndi:BPMNShape id="Participant_1roeun7_di" bpmnElement="Participant_1roeun7" isHorizontal="true">
@@ -95,10 +94,6 @@
       <bpmndi:BPMNShape id="Event_0yccuze_di" bpmnElement="Event_0yccuze">
         <dc:Bounds x="492" y="222" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0j5isex_di" bpmnElement="Activity_0j5isex">
-        <dc:Bounds x="580" y="200" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0uen76b_di" bpmnElement="Activity_13l540r">
         <dc:Bounds x="740" y="200" width="100" height="80" />
         <bpmndi:BPMNLabel />
@@ -114,6 +109,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0i9qt6j_di" bpmnElement="Activity_19r93sh">
         <dc:Bounds x="710" y="320" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_11v488s_di" bpmnElement="Activity_0j5isex">
+        <dc:Bounds x="580" y="200" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1dtouf4_di" bpmnElement="Event_1vuiql6">
         <dc:Bounds x="592" y="262" width="36" height="36" />
