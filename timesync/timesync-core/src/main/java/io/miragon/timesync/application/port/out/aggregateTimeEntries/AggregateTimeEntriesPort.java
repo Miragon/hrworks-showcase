@@ -4,5 +4,10 @@ import org.springframework.web.reactive.function.client.WebClientResponseExcepti
 
 public interface AggregateTimeEntriesPort {
 
-    AggregateTimeEntriesResult aggregateTimeEntries(AggregateTimeEntriesCommand aggregateTimeEntriesCommand) throws WebClientResponseException;
+    /**
+     * Get the working times of one employee.
+     * @param aggregateTimeEntriesCommand Information to identify the employee and time frame.
+     * @return Working hours recorded by the employee in the given period of time.
+     */
+    AggregateTimeEntriesResult aggregateTimeEntries(AggregateTimeEntriesCommand aggregateTimeEntriesCommand);
 }
