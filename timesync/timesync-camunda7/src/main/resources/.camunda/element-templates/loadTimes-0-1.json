@@ -35,7 +35,7 @@
     "type" : "Hidden",
     "binding" : {
       "type" : "camunda:inputParameter",
-      "name" : "aggregatedUserTimes"
+      "name" : "timeEntries"
     }
   }, {
     "value" : "timeEntries",
@@ -43,7 +43,7 @@
     "type" : "String",
     "binding" : {
       "type" : "camunda:outputParameter",
-      "source" : "${aggregatedUserTimes}"
+      "source" : "${timeEntries}"
     }
   } ]
 }

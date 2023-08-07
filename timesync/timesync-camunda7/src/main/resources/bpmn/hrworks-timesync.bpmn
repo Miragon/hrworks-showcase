@@ -69,8 +69,8 @@
         <bpmn:extensionElements>
           <camunda:inputOutput>
             <camunda:inputParameter name="user">${user}</camunda:inputParameter>
-            <camunda:inputParameter name="aggregatedUserTimes">${JSON('{}')}</camunda:inputParameter>
-            <camunda:outputParameter name="timeEntries">${aggregatedUserTimes}</camunda:outputParameter>
+            <camunda:inputParameter name="timeEntries">${JSON('{}')}</camunda:inputParameter>
+            <camunda:outputParameter name="timeEntries">${timeEntries}</camunda:outputParameter>
           </camunda:inputOutput>
         </bpmn:extensionElements>
         <bpmn:incoming>Flow_0o7gw5k</bpmn:incoming>

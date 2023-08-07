@@ -56,12 +56,6 @@
             <artifactId>worker-api</artifactId>
             <version>${miranum.version}</version>
         </dependency>
-
-        <dependency>
-            <groupId>io.miragon.miranum</groupId>
-            <artifactId>element-template-api</artifactId>
-            <version>${miranum.version}</version>
-        </dependency>
         <!-- MIRANUM API DEPENDENCIES -->
     </dependencies>
 
