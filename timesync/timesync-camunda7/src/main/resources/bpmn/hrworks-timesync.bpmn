@@ -35,7 +35,7 @@
       <bpmn:endEvent id="Event_1w5i4cb" name="times synced">
         <bpmn:incoming>Flow_0wku1by</bpmn:incoming>
       </bpmn:endEvent>
-      <bpmn:endEvent id="Event_1blglkt" name="error processed">
+      <bpmn:endEvent id="Event_1blglkt" name="error detected">
         <bpmn:incoming>Flow_0kp2a9q</bpmn:incoming>
       </bpmn:endEvent>
       <bpmn:userTask id="Activity_19r93sh" name="Notify" camunda:formRef="Form_1oa39h7" camunda:formRefBinding="deployment" camunda:assignee="demo">
@@ -114,7 +114,7 @@
       <bpmndi:BPMNShape id="Event_1blglkt_di" bpmnElement="Event_1blglkt">
         <dc:Bounds x="902" y="342" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="881" y="385" width="78" height="14" />
+          <dc:Bounds x="886" y="385" width="69" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0i9qt6j_di" bpmnElement="Activity_19r93sh">

@@ -4,28 +4,29 @@ This project serves as a showcase for demonstrating the synchronization of times
 
 ## The Process
 
-<img alt="hrworks-bpmn-diagram" src="images/hrworks-timesync.png">
-
-This BPMN diagram represents the **HRworks TimeSync Process** using the Camunda Modeler (exporter version 5.13.0).
+<p>
+   <img alt="hrworks-bpmn-diagram" src="images/hrworks-timesync.png">
+   <em>This BPMN diagram represents the <b>HRworks TimeSync Process</b> using the Camunda Modeler (exporter version 5.13.0).</em>
+</p>
 
 The process involves synchronizing time-related data within the HRworks system. It consists of the following key steps:
 
 1. **Start Event**: The process begins with a start event. This should be changed to a timer start event to trigger automatically at a specific time.
 
-2. **Load Users Service Task**: This external service task named "Load Users" is executed asynchronously. It loads user data and related information. The loaded data includes users, employees, and workspace information.
+2. **Load Users Service Task**: This external service task named "Load Users" loads user data and related information. The loaded data includes users, employees, and workspace information.
 
 3. **Subprocess - Sync Time Entries for Users**:
     - This subprocess is a multi-instance subprocess, executed asynchronously and in parallel for each user.
-    - It contains several tasks:
+    - It contains the following steps:
         - **Start Event**: This event initiates the subprocess for each user.
         - **Load Time Entries Service Task**: This external service task loads time entry data for the user. When an error occurs, the boundary event is triggered.
         - **Sync Time Service Task**: Another external service task syncs the time entries for the user.
-        - **Notify User Task**: This task notifies the user when a user's time could not be loaded successfully. There is one error triggered by purpose in the code to demonstrate the notification user task.
+        - **Notify about error User Task**: This task notifies the user when a user's time entries failed to load successfully. In our code, we intentionally trigger this error for a user to demonstrate this user task.
+        - **End Event**: The subprocess can end with two types of end events:
+            - **"Times synced"**: If the time synchronization process completes successfully.
+            - **"Error detected"**: If there was an error during the "Load Time Entries"-Task.
 
-4. **End Events**:
-    - The subprocess can end with two types of end events:
-        - **"times synced"**: If the time synchronization process completes successfully.
-        - **"error processed"**: If there was an error during the synchronization process.
+4. **End Events**: When the subprocess is terminated, the entire process is also terminated.
 
 ### Flow of Execution
 
@@ -34,8 +35,8 @@ The process involves synchronizing time-related data within the HRworks system. 
 3. In the subprocess:
     - **Load Time Entries** service task fetches time entries data for the user.
     - **Sync Time** service task synchronizes the time entries.
-    - **Notify** user task informs the user about an error in the process.
-4. Depending on the outcome, the subprocess concludes with either a successful `times synced` end event or an `error processed` end event.
+    - **Notify about error** user task informs the user about an error in the process.
+4. Depending on the outcome, the subprocess concludes with either a successful `Times synced` end event or an `Error detected` end event.
 
 ## Run the Stack
 
@@ -67,10 +68,10 @@ The Camunda Platform and the PostgreSQL database will now be up and running in a
 ### Accessing Camunda Web Applications
 
 After starting the stack, you can access the Camunda Web Applications using the following URLs:
-
-Camunda Tasklist: http://localhost:8080/camunda/app/tasklist/default/#/?searchQuery=%5B%5D
-Camunda Cockpit: http://localhost:8080/camunda/app/cockpit/default/#/dashboard
-Camunda Admin: http://localhost:8080/camunda/app/admin/default/#/
+> Note: The login credentials are `demo` as username and password
+* [Camunda Tasklist](http://localhost:8080/camunda/app/tasklist/default/#/?searchQuery=%5B%5D)
+* [Camunda Cockpit](http://localhost:8080/camunda/app/cockpit/default/#/dashboard)
+* [Camunda Admin](http://localhost:8080/camunda/app/admin/default/#/)
 
 ## Project Setup
 
