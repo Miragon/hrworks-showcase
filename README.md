@@ -18,7 +18,7 @@ The process involves synchronizing time-related data within the HRworks system. 
     - This subprocess is a multi-instance subprocess, executed asynchronously and in parallel for each user.
     - It contains several tasks:
         - **Start Event**: This event initiates the subprocess for each user.
-        - **Load Time Entries Service Task**: This external service task loads time entry data for the user.
+        - **Load Time Entries Service Task**: This external service task loads time entry data for the user. When an error occurs, the boundary event is triggered.
         - **Sync Time Service Task**: Another external service task syncs the time entries for the user.
         - **Notify User Task**: This task notifies the user about the process status. There is one error triggered by purpose in the code to demonstrate the notification user task.
 
