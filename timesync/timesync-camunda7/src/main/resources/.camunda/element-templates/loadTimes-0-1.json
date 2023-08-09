@@ -22,6 +22,14 @@
       "name" : "camunda:topic"
     }
   }, {
+    "value" : "${workspace}",
+    "label" : "User",
+    "type" : "String",
+    "binding" : {
+      "type" : "camunda:inputParameter",
+      "name" : "workspace"
+    }
+  }, {
     "value" : "${user}",
     "label" : "User",
     "type" : "String",

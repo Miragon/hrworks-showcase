@@ -11,6 +11,8 @@
       <bpmn:extensionElements>
         <camunda:inputOutput>
           <camunda:outputParameter name="users">${users}</camunda:outputParameter>
+          <camunda:outputParameter name="employees">${employees}</camunda:outputParameter>
+          <camunda:outputParameter name="workspace">${workspace}</camunda:outputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1d64sl3</bpmn:incoming>
@@ -30,16 +32,6 @@
       <bpmn:startEvent id="Event_0yccuze">
         <bpmn:outgoing>Flow_0o7gw5k</bpmn:outgoing>
       </bpmn:startEvent>
-      <bpmn:serviceTask id="Activity_13l540r" name="Sync Time" camunda:modelerTemplate="syncTimes" camunda:type="external" camunda:topic="syncTimes">
-        <bpmn:extensionElements>
-          <camunda:inputOutput>
-            <camunda:inputParameter name="user">${user}</camunda:inputParameter>
-            <camunda:inputParameter name="timeEntries">${timeEntries}</camunda:inputParameter>
-          </camunda:inputOutput>
-        </bpmn:extensionElements>
-        <bpmn:incoming>Flow_0ufba14</bpmn:incoming>
-        <bpmn:outgoing>Flow_0wku1by</bpmn:outgoing>
-      </bpmn:serviceTask>
       <bpmn:endEvent id="Event_1w5i4cb" name="times synced">
         <bpmn:incoming>Flow_0wku1by</bpmn:incoming>
       </bpmn:endEvent>
@@ -68,6 +60,7 @@
       <bpmn:serviceTask id="Activity_0j5isex" name="Load Time Entries" camunda:modelerTemplate="loadTime" camunda:type="external" camunda:topic="loadTimes">
         <bpmn:extensionElements>
           <camunda:inputOutput>
+            <camunda:inputParameter name="workspace">${workspace}</camunda:inputParameter>
             <camunda:inputParameter name="user">${user}</camunda:inputParameter>
             <camunda:inputParameter name="timeEntries">${JSON('{}')}</camunda:inputParameter>
             <camunda:outputParameter name="timeEntries">${timeEntries}</camunda:outputParameter>
@@ -75,6 +68,17 @@
         </bpmn:extensionElements>
         <bpmn:incoming>Flow_0o7gw5k</bpmn:incoming>
         <bpmn:outgoing>Flow_0ufba14</bpmn:outgoing>
+      </bpmn:serviceTask>
+      <bpmn:serviceTask id="Activity_13l540r" name="Sync Time" camunda:modelerTemplate="syncTimes" camunda:type="external" camunda:topic="syncTimes">
+        <bpmn:extensionElements>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="employees">${employees}</camunda:inputParameter>
+            <camunda:inputParameter name="user">${user}</camunda:inputParameter>
+            <camunda:inputParameter name="timeEntries">${timeEntries}</camunda:inputParameter>
+          </camunda:inputOutput>
+        </bpmn:extensionElements>
+        <bpmn:incoming>Flow_0ufba14</bpmn:incoming>
+        <bpmn:outgoing>Flow_0wku1by</bpmn:outgoing>
       </bpmn:serviceTask>
     </bpmn:subProcess>
   </bpmn:process>
@@ -101,10 +105,6 @@
       <bpmndi:BPMNShape id="Event_0yccuze_di" bpmnElement="Event_0yccuze">
         <dc:Bounds x="492" y="222" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0uen76b_di" bpmnElement="Activity_13l540r">
-        <dc:Bounds x="740" y="200" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1w5i4cb_di" bpmnElement="Event_1w5i4cb">
         <dc:Bounds x="902" y="222" width="36" height="36" />
         <bpmndi:BPMNLabel>
@@ -122,6 +122,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1ld99fx_di" bpmnElement="Activity_0j5isex">
         <dc:Bounds x="580" y="200" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1atqvg4_di" bpmnElement="Activity_13l540r">
+        <dc:Bounds x="740" y="200" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1dtouf4_di" bpmnElement="Event_1vuiql6">
         <dc:Bounds x="592" y="262" width="36" height="36" />

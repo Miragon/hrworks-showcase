@@ -14,8 +14,6 @@ import io.miragon.timesync.application.port.out.sendworkingtimes.SendWorkingTime
 import io.miragon.timesync.application.service.LoadTimesService;
 import io.miragon.timesync.application.service.LoadUsersService;
 import io.miragon.timesync.application.service.SyncTimesService;
-import io.miragon.timesync.domain.EmployeesData;
-import io.miragon.timesync.domain.Workspace;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -29,37 +27,23 @@ import org.springframework.context.annotation.Import;
 public class TimeSyncAutoConfiguration {
 
     @Bean
-    public Workspace workspace() {
-        return new Workspace();
-    }
-
-    @Bean
-    public EmployeesData employeesData() {
-        return new EmployeesData();
-    }
-
-    @Bean
     public LoadUsersUseCase loadUsersUseCase(final LoadWorkspacesPort loadWorkspacesPort,
                                              final LoadUsersPort loadUsersPort,
-                                             final LoadEmployeesDataPort loadEmployeesDataPort,
-                                             final Workspace workspace,
-                                             final EmployeesData employeesData)
+                                             final LoadEmployeesDataPort loadEmployeesDataPort)
     {
-        return new LoadUsersService(loadWorkspacesPort, loadUsersPort, loadEmployeesDataPort, workspace, employeesData);
+        return new LoadUsersService(loadWorkspacesPort, loadUsersPort, loadEmployeesDataPort);
     }
 
     @Bean
-    public LoadTimesUseCase loadTimesUseCase(final AggregateTimeEntriesPort aggregateTimeEntriesPort,
-                                             final Workspace workspace)
+    public LoadTimesUseCase loadTimesUseCase(final AggregateTimeEntriesPort aggregateTimeEntriesPort)
     {
-        return new LoadTimesService(aggregateTimeEntriesPort, workspace);
+        return new LoadTimesService(aggregateTimeEntriesPort);
     }
 
 
     @Bean
-    public SyncTimesUseCase syncTimesUseCase(final SendWorkingTimesPort sendWorkingTimesPort,
-                                             final EmployeesData employeesData)
+    public SyncTimesUseCase syncTimesUseCase(final SendWorkingTimesPort sendWorkingTimesPort)
     {
-        return new SyncTimesService(sendWorkingTimesPort, employeesData);
+        return new SyncTimesService(sendWorkingTimesPort);
     }
 }

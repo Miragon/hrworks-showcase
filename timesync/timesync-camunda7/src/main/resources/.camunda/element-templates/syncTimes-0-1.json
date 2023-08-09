@@ -22,6 +22,14 @@
       "name" : "camunda:topic"
     }
   }, {
+    "value" : "${employees}",
+    "label" : "Employees",
+    "type" : "String",
+    "binding" : {
+      "type" : "camunda:inputParameter",
+      "name" : "employees"
+    }
+  }, {
     "value" : "${user}",
     "label" : "User",
     "type" : "String",

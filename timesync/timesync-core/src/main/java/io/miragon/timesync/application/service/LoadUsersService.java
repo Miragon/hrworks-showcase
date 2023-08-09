@@ -23,26 +23,22 @@ public class LoadUsersService implements LoadUsersUseCase
     private final LoadUsersPort loadUsersPort;
     private final LoadEmployeesDataPort loadEmployeesDataPort;
 
-    private final Workspace workspace;
-    private final EmployeesData employees;
-
     @Override
     public LoadUsersResult loadUsers()
     {
         log.info("[LOAD-USERS] Syncing times...");
         log.info("[LOAD-USERS] Loading workspaces...");
         List<Workspace> workspaces = loadWorkspacesPort.loadWorkspaces();
-        workspace.setId(workspaces.get(0).getId());
-        workspace.setName(workspaces.get(0).getName());
+        Workspace workspace = workspaces.get(0);
 
         log.info("[LOAD-USERS] Loading users from Clockify...");
         List<User> users = loadUsersPort.loadUsers(new LoadUsersCommand(workspace));
         log.info("[LOAD-USERS] Loading employees from HrWorks...");
-        employees.setPersons(loadEmployeesDataPort.loadEmployeesData().getPersons());
+        EmployeesData employeesData = loadEmployeesDataPort.loadEmployeesData();
 
         // Force an error when loading times (only for the showcase)
         users.add(new User("123", "error@miragon.io"));
 
-        return new LoadUsersResult(users);
+        return new LoadUsersResult(workspace, users, employeesData.getPersons());
     }
 }

@@ -20,8 +20,6 @@ public class LoadTimesService implements LoadTimesUseCase
 {
     private final AggregateTimeEntriesPort aggregateTimeEntriesPort;
 
-    private final Workspace workspace;
-
     private static final LocalDateTime firstOfCurrentMonth = LocalDateTime.now()
             .withDayOfMonth(1)
             .with(LocalTime.MIN);
@@ -33,6 +31,7 @@ public class LoadTimesService implements LoadTimesUseCase
     @Override
     public LoadTimesResult loadTimes(LoadTimesCommand loadTimesCommand)
     {
+        Workspace workspace = loadTimesCommand.getWorkspace();
         User user = loadTimesCommand.getUser();
         var aggregateTimeEntriesCommand =
                 new AggregateTimeEntriesCommand(workspace, user, firstDayOfTwoMonthsAgo, firstOfCurrentMonth);

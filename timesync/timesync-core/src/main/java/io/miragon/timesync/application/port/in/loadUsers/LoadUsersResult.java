@@ -1,6 +1,8 @@
 package io.miragon.timesync.application.port.in.loadUsers;
 
+import io.miragon.timesync.domain.EmployeeData;
 import io.miragon.timesync.domain.User;
+import io.miragon.timesync.domain.Workspace;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,5 +16,7 @@ import java.util.List;
 @Setter
 public class LoadUsersResult
 {
-    private List<User> users;
+    private Workspace workspace;
+    private List<User> users; // Users from Clockify
+    private List<EmployeeData> employees; // Employees from HrWorks
 }
