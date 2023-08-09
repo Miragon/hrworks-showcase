@@ -14,7 +14,7 @@ import java.util.Map;
 public class AggregateTimeEntriesResult {
 
     /**
-     * Format: E-Mail -> {StartDateAndTime -> EndTimeAndDate}
+     * Format: {StartDateAndTime -> EndTimeAndDate}
      */
-    private Map<String, Map<String, String>> aggregatedUserTimes;
+    private Map<String, String> aggregatedUserTimes;
 }

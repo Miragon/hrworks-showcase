@@ -17,7 +17,7 @@ cd stack/hrworks-showcase-c7
 Then build the Docker image using the following command:
 
 ```bash
-docker build -t camunda-7-with-history-plugin -f Dockerfile.camunda .
+docker compose build
 ```
 
 ### Step 2: Start the Stack
@@ -25,7 +25,7 @@ docker build -t camunda-7-with-history-plugin -f Dockerfile.camunda .
 Once the Docker image is built, use `docker-compose` to start the Camunda Platform along with the PostgreSQL database:
 
 ```bash
-docker-compose up
+docker compose up
 ```
 The Camunda Platform and the PostgreSQL database will now be up and running in a containerized environment.
 
@@ -78,6 +78,14 @@ running the project.
 ## Running the Project
 
 After following the [Project Setup](#project-setup) you should be able to simply start the `TimeSyncCamunda7Application`.
+
+## Deploy artifacts
+
+You can use the [Camunda Modeler](https://camunda.com/de/download/modeler/) to deploy the process.
+1. Open the [bpmn file](./timesync/timesync-camunda7/src/main/resources/bpmn/hrworks-timesync.bpmn)
+2. Add the [form](./timesync/timesync-camunda7/src/main/resources/.camunda/forms/error.form) to your deployment  
+<img src="https://github.com/Miragon/hrworks-showcase/blob/55510cff5ce7f3765623d516480853c411d44112/images/deployment.png?raw=true" alt="deployment" width=180>
+3. Click on `Deploy`
 
 ## Run Tests
 

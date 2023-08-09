@@ -11,7 +11,7 @@ services:
 
   # Camunda Platform 7 with History Plugin
   camunda-postgres:
-    image: camunda-7-with-history-plugin
+    build: ./camunda
     environment:
       - DB_DRIVER=org.postgresql.Driver
       - DB_URL=jdbc:postgresql://postgres:5432/camunda

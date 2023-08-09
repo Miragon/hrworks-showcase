@@ -1,0 +1,57 @@
+{
+  "$schema" : "https://unpkg.com/@camunda/element-templates-json-schema@0.1.0/resources/schema.json",
+  "name" : "Load Times",
+  "id" : "loadTime",
+  "appliesTo" : [ "bpmn:ServiceTask" ],
+  "properties" : [ {
+    "value" : "external",
+    "label" : "Implementation Type",
+    "type" : "String",
+    "editable" : false,
+    "binding" : {
+      "type" : "property",
+      "name" : "camunda:type"
+    }
+  }, {
+    "value" : "loadTimes",
+    "label" : "Topic",
+    "type" : "String",
+    "editable" : false,
+    "binding" : {
+      "type" : "property",
+      "name" : "camunda:topic"
+    }
+  }, {
+    "value" : "${workspace}",
+    "label" : "User",
+    "type" : "String",
+    "binding" : {
+      "type" : "camunda:inputParameter",
+      "name" : "workspace"
+    }
+  }, {
+    "value" : "${user}",
+    "label" : "User",
+    "type" : "String",
+    "binding" : {
+      "type" : "camunda:inputParameter",
+      "name" : "user"
+    }
+  }, {
+    "value" : "${JSON('{}')}",
+    "label" : "User",
+    "type" : "Hidden",
+    "binding" : {
+      "type" : "camunda:inputParameter",
+      "name" : "timeEntries"
+    }
+  }, {
+    "value" : "timeEntries",
+    "label" : "Aggregated User Times",
+    "type" : "String",
+    "binding" : {
+      "type" : "camunda:outputParameter",
+      "source" : "${timeEntries}"
+    }
+  } ]
+}
