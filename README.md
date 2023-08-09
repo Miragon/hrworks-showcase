@@ -15,7 +15,7 @@ The process involves synchronizing time-related data within the HRworks system. 
 2. **Load Users Service Task**: This external service task named "Load Users" is executed asynchronously. It loads user data and related information. The loaded data includes users, employees, and workspace information.
 
 3. **Subprocess - Sync Time Entries for Users**:
-    - This subprocess is a multi-instance subprocess, executed asynchronously for each user.
+    - This subprocess is a multi-instance subprocess, executed asynchronously and in parallel for each user.
     - It contains several tasks:
         - **Start Event**: This event initiates the subprocess for each user.
         - **Load Time Entries Service Task**: This external service task loads time entry data for the user.
