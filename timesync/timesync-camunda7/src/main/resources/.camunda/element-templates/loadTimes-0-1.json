@@ -23,7 +23,7 @@
     }
   }, {
     "value" : "${workspace}",
-    "label" : "User",
+    "label" : "Workspace",
     "type" : "String",
     "binding" : {
       "type" : "camunda:inputParameter",
