@@ -10,9 +10,9 @@ camunda:
 
 # Clockify
 clockify:
-  apiKey: "<API-KEY>"
+  apiKey: ${CLOCKIFY_API_KEY}
 
 # HRWorks
 hrworks:
-  accessKey: "<ACCESS-KEY>"
-  secretAccessKey: "<SECRET-ACCESS-KEY>"
+  accessKey: ${HRWORKS_AC_KEY}
+  secretAccessKey: ${HRWORKS_SAC_KEY}

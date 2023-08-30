@@ -5,9 +5,9 @@ services:
   postgres:
     image: postgres:12
     environment:
-      - POSTGRES_HOST_AUTH_METHOD=md5
-      - POSTGRES_USER=camunda
-      - POSTGRES_PASSWORD=camunda
+      POSTGRES_HOST_AUTH_METHOD: md5
+      POSTGRES_USER: camunda
+      POSTGRES_PASSWORD: camunda
     networks:
       - internal
 
@@ -15,11 +15,11 @@ services:
   engine:
     build: camunda
     environment:
-      - DB_DRIVER=org.postgresql.Driver
-      - DB_URL=jdbc:postgresql://postgres:5432/camunda
-      - DB_USERNAME=camunda
-      - DB_PASSWORD=camunda
-      - WAIT_FOR=postgres:5432
+      DB_DRIVER: org.postgresql.Driver
+      DB_URL: jdbc:postgresql://postgres:5432/camunda
+      DB_USERNAME: camunda
+      DB_PASSWORD: camunda
+      WAIT_FOR: postgres:5432
     networks:
       - internal
     links:
@@ -33,7 +33,10 @@ services:
     build:
       context: ../timesync/timesync-camunda7
     environment:
-      - CAMUNDA_BASE_URL=http://engine:8080/engine-rest
+      CAMUNDA_BASE_URL: http://engine:8080/engine-rest
+      CLOCKIFY_API_KEY: ${CLOCKIFY_API_KEY}
+      HRWORKS_AC_KEY: ${HRWORKS_AC_KEY}
+      HRWORKS_SAC_KEY: ${HRWORKS_SAC_KEY}
     networks:
       - internal
     links:
@@ -41,6 +44,8 @@ services:
     depends_on:
       engine:
         condition: service_started
+    profiles:
+      - worker
     restart: unless-stopped
 
 networks:
