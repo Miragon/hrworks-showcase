@@ -5,10 +5,8 @@ server:
 camunda:
   bpm:
     client:
-      base-url: http://localhost:8080/engine-rest
-  autoDeploy:
-    enabled: true
-  disable-backoff-strategy: true
+      base-url: ${CAMUNDA_BASE_URL:http://localhost:8080/engine-rest}
+      disable-backoff-strategy: true
 
 # Clockify
 clockify:

@@ -8,18 +8,40 @@ services:
       - POSTGRES_HOST_AUTH_METHOD=md5
       - POSTGRES_USER=camunda
       - POSTGRES_PASSWORD=camunda
+    networks:
+      - internal
 
   # Camunda Platform 7 with History Plugin
-  camunda-postgres:
-    build: ./camunda
+  engine:
+    build: camunda
     environment:
       - DB_DRIVER=org.postgresql.Driver
       - DB_URL=jdbc:postgresql://postgres:5432/camunda
       - DB_USERNAME=camunda
       - DB_PASSWORD=camunda
       - WAIT_FOR=postgres:5432
+    networks:
+      - internal
     links:
       - postgres
     ports:
       - "8080:8080"
     restart: unless-stopped
+
+  timesync-worker:
+    container_name: timesync-worker
+    build:
+      context: ../timesync/timesync-camunda7
+    environment:
+      - CAMUNDA_BASE_URL=http://engine:8080/engine-rest
+    networks:
+      - internal
+    links:
+      - engine
+    depends_on:
+      engine:
+        condition: service_started
+    restart: unless-stopped
+
+networks:
+  internal:
