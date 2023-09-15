@@ -2,6 +2,10 @@
 
 This project serves as a showcase for demonstrating the synchronization of times between Clockify and HRWorks using Camunda 7 and following the principles of the Hexagonal Architecture.
 
+## The Architecture
+
+![Software Architecture](https://www.plantuml.com/plantuml/proxy?cache=no&src=https://github.com/Miragon/hrworks-showcase/blob/main/images/Architecture.puml?raw=true)
+
 ## The Process
 
 <p>
