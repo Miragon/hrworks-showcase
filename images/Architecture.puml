@@ -1,0 +1,54 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+'https://plantuml.com/component-diagram
+
+skinparam component {
+  backgroundColor<<InAdapter>> LightGreen
+  backgroundColor<<Service>> LightBlue
+  backgroundColor<<OutAdapter>> LightYellow
+}
+
+component "MiranumWorkerAdapter" as InMiranumWorkerAdapter <<InAdapter>>
+
+component {
+    portin LoadUserUseCase
+    portin LoadTimesUseCase
+    portin SyncTimesUseCase
+
+    portout AggregatedTimeEntriesPort
+    portout LoadEmployeesDataPort
+    portout LoadUsersPort
+    portout LoadWorkspacesPort
+    portout SendWorkingTimesPort
+
+    component LoadUsersService <<Service>>
+    component LoadTimesService <<Service>>
+    component SynctimesService <<Service>>
+}
+
+component "ClockifyAdapter" as OutClockifyAdapter <<OutAdapter>>
+component "HrWorksAdapter" as OutHrWorksAdapter <<OutAdapter>>
+
+InMiranumWorkerAdapter --> LoadUserUseCase
+InMiranumWorkerAdapter --> LoadTimesUseCase
+InMiranumWorkerAdapter --> SyncTimesUseCase
+
+LoadUserUseCase <.. LoadUsersService
+LoadTimesUseCase <.. LoadTimesService
+SyncTimesUseCase <.. SynctimesService
+
+LoadUsersService --> LoadWorkspacesPort
+LoadUsersService --> LoadUsersPort
+LoadUsersService --> LoadEmployeesDataPort
+LoadTimesService --> AggregatedTimeEntriesPort
+SynctimesService --> SendWorkingTimesPort
+
+LoadWorkspacesPort <.. OutClockifyAdapter
+LoadUsersPort <.. OutClockifyAdapter
+AggregatedTimeEntriesPort <.. OutClockifyAdapter
+
+LoadEmployeesDataPort <.. OutHrWorksAdapter
+SendWorkingTimesPort <.. OutHrWorksAdapter
+
+@enduml
